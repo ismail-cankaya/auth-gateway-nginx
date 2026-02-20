@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_gateway
+    ports:
+      - "80:80" # Dış dünyaya SADECE 80 portu (varsayılan HTTP) açık!
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - app-network # Diğer projelerinle aynı ağa bağladık
+
+networks:
+  app-network:
+    external: true
